@@ -1,0 +1,47 @@
+.country-boxes {
+  display: grid;
+  row-gap: 40px;
+  justify-content: center;
+}
+
+.country-box {
+  width: 264px;
+  height: 336px;
+  background: #2b3844;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.0294384);
+
+  .country-flag {
+    width: 264px;
+    height: 160px;
+
+    img {
+      width: 264px;
+      height: 160px;
+    }
+  }
+
+  .country-text {
+    padding: 24px;
+  }
+
+  .country-name {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 26px;
+    color: #fff;
+  }
+  .country-info {
+    display: grid;
+    row-gap: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 16px;
+    color: #fff;
+
+    span {
+      font-weight: 600;
+    }
+  }
+}

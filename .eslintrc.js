@@ -23,7 +23,9 @@ module.exports = {
 
     'no-unused-vars': 'warn',
     'no-useless-escape': 'warn',
-    'no-unreachable': 'warn'
+    'no-unreachable': 'warn',
+
+    'vue/no-unused-components': 'warn'
   },
   overrides: [
     {
