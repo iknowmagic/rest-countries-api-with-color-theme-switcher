@@ -10,14 +10,28 @@
   background: #2b3844;
   border-radius: 5px;
   box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.0294384);
+  // transition: background 0.3s ease;
 
   .country-flag {
+    display: grid;
+    justify-content: center;
     width: 264px;
     height: 160px;
 
     img {
       width: 264px;
       height: 160px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: none;
+      border-bottom-left-radius: none;
+    }
+    .country-loader {
+      width: 200px;
+      height: 200px;
+      background-image: url('~@/assets/images/country-loader-dark.gif');
+      background-repeat: no-repeat;
+      background-size: 200px;
     }
   }
 
@@ -30,7 +44,6 @@
     font-size: 18px;
     font-weight: 800;
     line-height: 26px;
-    color: #fff;
   }
   .country-info {
     display: grid;
@@ -38,10 +51,27 @@
     font-size: 14px;
     font-weight: 300;
     line-height: 16px;
-    color: #fff;
 
     span {
       font-weight: 600;
+    }
+  }
+}
+
+.map-placeholder {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  opacity: 0.2;
+}
+
+.light-mode {
+  .country-box {
+    background: #fff;
+
+    .country-loader {
+      background-image: url('~@/assets/images/country-loader-light.gif');
     }
   }
 }

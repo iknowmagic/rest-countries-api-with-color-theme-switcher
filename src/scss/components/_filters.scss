@@ -1,0 +1,51 @@
+.filters {
+  display: grid;
+  justify-content: center;
+  .input-container {
+    position: relative;
+    width: 343px;
+    height: 48px;
+    margin-bottom: 40px;
+  }
+  .field-icon {
+    position: absolute;
+    top: 16px;
+    left: 30px;
+    z-index: 1;
+    color: #fff;
+  }
+  input {
+    position: absolute;
+    width: 100%;
+    height: 48px;
+    padding-left: 75px;
+    font-size: 12px;
+    line-height: 20px;
+    color: #fff;
+    background: #2b3844;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: 0 2px 9px rgba(0, 0, 0, 0.0532439);
+
+    &::placeholder {
+      color: #fff;
+      opacity: 0.8;
+    }
+  }
+}
+
+.light-mode {
+  .field-icon {
+    color: #b2b2b2;
+  }
+  input {
+    color: #c4c4c4;
+    background: #fff;
+
+    &::placeholder {
+      color: #c4c4c4;
+      opacity: 0.8;
+    }
+  }
+}

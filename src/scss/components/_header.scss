@@ -1,0 +1,41 @@
+header {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: auto auto;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 80px;
+  padding: 30px 16px;
+  margin-bottom: 24px;
+  background: #2b3844;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.0562443);
+  transition: background 0.3s ease;
+
+  .header-title {
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 20px;
+  }
+
+  .header-toggle {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 16px;
+    cursor: pointer;
+
+    .icon {
+      margin-right: 8px;
+    }
+  }
+}
+
+.light-mode {
+  header {
+    background: #fff;
+  }
+}

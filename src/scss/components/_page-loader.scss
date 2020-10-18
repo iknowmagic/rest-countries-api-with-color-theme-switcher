@@ -1,0 +1,15 @@
+.page-loader {
+  display: grid;
+  grid-template-rows: 100px auto;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding-top: 50px;
+  color: #fff;
+}
+
+.light-mode {
+  .page-loader {
+    color: #111517;
+  }
+}

@@ -1,12 +1,12 @@
 <template>
   <div class="country-boxes">
-    <template v-for="country in countries">
+    <template v-for="(item, key) in processedCountries">
       <country-box
-        v-show="country.dataSeen"
-        :key="country.alpha3Code"
-        :country="country"
+        ref="items"
+        :key="key"
+        :item="item"
+        :data-id="key"
         :observer="observer"
-        :data-index="country.dataIndex"
       />
     </template>
   </div>
@@ -15,60 +15,60 @@
 <script>
 // @flow
 
-import api from '@/services'
+import { sync } from 'vuex-pathify'
+
+import _cloneDeep from 'lodash/cloneDeep'
+
 import CountryBox from '@/components/CountryBox'
 
 export default {
   name: 'CountryBoxes',
+  directives: {},
   components: {
     CountryBox
   },
   data() {
     return {
-      observer: undefined,
-      countries: []
+      observer: undefined
     }
   },
   computed: {
-    // currCountryList() {
-    // }
+    processedCountries: sync('app/processedCountries')
+  },
+  watch: {
+    processedCountries() {
+      this.observer.disconnect()
+      this.observer = undefined
+      this.observer = new IntersectionObserver(this.handleIntersection, {
+        threshold: 0.1
+      })
+    }
+  },
+  mounted() {
+    this.observer = new IntersectionObserver(this.handleIntersection, {
+      threshold: 0.1
+    })
+    for (const item of this.$refs.items) {
+      // this.observer.observe(item.$el)
+    }
   },
   beforeDestroy() {
     this.observer.disconnect()
   },
-  created() {
-    this.observer = new IntersectionObserver(this.onElementObserved, {
-      root: this.$el,
-      threshold: 1.0
-    })
-  },
-  mounted() {
-    this.getAllCountries()
-  },
   methods: {
-    async getAllCountries() {
-      const { data } = await api.countries.getAllCountries()
-      this.countries = data.map((item, key) => {
-        return {
-          ...item,
-          dataIndex: key,
-          dataSeen: false
-        }
-      })
-    },
-    onElementObserved(entries) {
+    handleIntersection(entries, observer) {
+      const countries = _cloneDeep(this.processedCountries)
       entries.forEach(({ target, isIntersecting }) => {
-        if (!isIntersecting) {
-          return
+        const id = target.dataset.id
+        if (isIntersecting) {
+          this.observer.unobserve(target)
+          countries[id].dataSeen = true
+        } else {
+          countries[id].dataSeen = false
         }
-
-        this.observer.unobserve(target)
-
-        setTimeout(() => {
-          const i = target.getAttribute('data-index')
-          this.countries[i].seen = true
-        }, 1000)
       })
+
+      this.processedCountries = countries
     }
   }
 }

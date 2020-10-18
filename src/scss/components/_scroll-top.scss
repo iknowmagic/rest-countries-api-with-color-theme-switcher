@@ -1,0 +1,13 @@
+.scroll-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  color: rgba(#fff, 0.9);
+  cursor: pointer;
+}
+
+.light-mode {
+  .scroll-top {
+    color: rgba(#2b3844, 0.9);
+  }
+}
