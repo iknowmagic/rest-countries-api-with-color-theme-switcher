@@ -64,7 +64,7 @@ export default {
       })
     },
     handleIntersection(entries, observer) {
-      console.log('HI')
+      // console.log('HI')
       const countries = _cloneDeep(this.countries)
       entries.forEach(({ target, isIntersecting }) => {
         const id = target.dataset.id

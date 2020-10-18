@@ -3,7 +3,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
   configureWebpack: {
-    name: 'photosnap',
+    name: 'where in the world?',
     /**
      * https://webpack.js.org/configuration/devtool/#devtool
      * https://blog.scottlogic.com/2017/11/01/webpack-source-map-options-quick-guide.html

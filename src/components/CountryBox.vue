@@ -26,11 +26,11 @@
               <span>Population:</span>
               {{ new Intl.NumberFormat('en').format(item.country.population) }}
             </div>
-            <div class="country-region">
+            <div v-if="item.country.region" class="country-region">
               <span>Region:</span>
               {{ item.country.region }}
             </div>
-            <div class="country-capital">
+            <div v-if="item.country.capital" class="country-capital">
               <span>Capital:</span>
               {{ item.country.capital }}
             </div>

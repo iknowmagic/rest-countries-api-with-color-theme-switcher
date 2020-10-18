@@ -8,76 +8,79 @@
       <header>
         <div class="header-title">Where in the world?</div>
         <div class="header-toggle" @click="lightMode = !lightMode">
-          <v-icon v-if="!lightMode" name="moon" scale="0.7" class="icon" />
+          <v-icon v-if="!lightMode" name="moon" xxxscale="0.7" class="icon" />
           <v-icon
             v-if="lightMode"
             name="regular/moon"
-            scale="0.7"
+            xxxscale="0.7"
             class="icon"
           />
           Dark Mode
         </div>
       </header>
-      <div class="filters">
-        <div
-          :class="[
-            'input-container',
-            { 'input-container-selected': !!countrySearch }
-          ]"
-        >
-          <v-icon name="search" class="field-icon" />
-          <input
-            v-model="tempCountrySearch"
-            type="text"
-            placeholder="Search for a country..."
-          />
-          <div
-            class="close"
-            @click="
-              countrySearch = undefined
-              tempCountrySearch = undefined
-            "
-          ></div>
-        </div>
 
-        <div
-          :class="[
-            'select-container',
-            { 'select-container-open': toggleSelect },
-            { 'select-container-selected': selectedRegion }
-          ]"
-        >
-          <div class="select" @click="toggleSelect = !toggleSelect">
-            {{ selectedRegion || 'Filter By Region' }}
+      <div class="filters-container">
+        <div class="filters">
+          <div
+            :class="[
+              'input-container',
+              { 'input-container-selected': !!countrySearch }
+            ]"
+          >
+            <v-icon name="search" class="field-icon" />
+            <input
+              v-model="tempCountrySearch"
+              type="text"
+              placeholder="Search for a country..."
+            />
+            <div
+              class="close"
+              @click="
+                countrySearch = undefined
+                tempCountrySearch = undefined
+              "
+            ></div>
           </div>
 
-          <div class="caret" @click="toggleSelect = !toggleSelect"></div>
           <div
-            class="close"
-            @click="
-              selectedRegion = undefined
-              toggleSelect = false
-            "
-          ></div>
-          <div class="select-options-container">
-            <transition
-              enter-active-class="animate__animated animate__slideInDown"
-              leave-active-class="animate__animated animate__slideOutUp"
-            >
-              <div v-if="toggleSelect" class="select-options">
-                <div
-                  v-for="region in regions"
-                  :key="region"
-                  class="select-option"
-                  @click="
-                    selectedRegion = region
-                    toggleSelect = false
-                  "
-                >
-                  {{ region }}
+            :class="[
+              'select-container',
+              { 'select-container-open': toggleSelect },
+              { 'select-container-selected': selectedRegion }
+            ]"
+          >
+            <div class="select" @click="toggleSelect = !toggleSelect">
+              {{ selectedRegion || 'Filter By Region' }}
+            </div>
+
+            <div class="caret" @click="toggleSelect = !toggleSelect"></div>
+            <div
+              class="close"
+              @click="
+                selectedRegion = undefined
+                toggleSelect = false
+              "
+            ></div>
+            <div class="select-options-container">
+              <transition
+                enter-active-class="animate__animated animate__slideInDown"
+                leave-active-class="animate__animated animate__slideOutUp"
+              >
+                <div v-if="toggleSelect" class="select-options">
+                  <div
+                    v-for="region in regions"
+                    :key="region"
+                    class="select-option"
+                    @click="
+                      selectedRegion = region
+                      toggleSelect = false
+                    "
+                  >
+                    {{ region }}
+                  </div>
                 </div>
-              </div>
-            </transition>
+              </transition>
+            </div>
           </div>
         </div>
       </div>
@@ -104,6 +107,8 @@
 
 import { sync } from 'vuex-pathify'
 
+import _map from 'lodash/map'
+
 import api from '@/services'
 
 import empty from '@/helpers/empty'
@@ -121,6 +126,7 @@ export default {
     return {
       pageLoaded: false,
       countries: [],
+      sortedCountries: [],
       countrySearch: undefined,
       regions: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
       selectedRegion: undefined,
@@ -161,7 +167,7 @@ export default {
       //   return
       // }
 
-      let filteredCountries = this.countries.filter(item => {
+      let filteredCountries = this.sortedCountries.filter(item => {
         // const str = item.name.toLowerCase()
         // if (str.startsWith(this.countrySearch)) {
         //   return true
@@ -185,6 +191,10 @@ export default {
       this.pageLoaded = false
       const { data } = await api.countries.getAllCountries()
       this.countries = data
+      this.sortedCountries = this.countries.sort((a, b) => {
+        if (a.name === b.name) return 0
+        return a.name < b.name ? -1 : 1
+      })
       this.processCountries()
       this.pageLoaded = true
     },
