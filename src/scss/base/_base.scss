@@ -1,4 +1,6 @@
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -15,4 +17,22 @@ body {
   text-rendering: geometricPrecision;
 }
 
+select {
+  width: 100%;
+  padding: 0 1em 0 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  cursor: inherit;
+  // Additional resets for further consistency
+  background-color: transparent;
+  border: none;
+  // A reset of styles, including removing the default dropdown arrow
+  appearance: none;
+  outline: none;
+}
 
+:root {
+  --animate-duration: 0.2s;
+}

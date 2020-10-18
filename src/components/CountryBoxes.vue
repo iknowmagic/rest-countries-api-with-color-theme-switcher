@@ -1,6 +1,6 @@
 <template>
   <div class="country-boxes">
-    <template v-for="(item, key) in processedCountries">
+    <template v-for="(item, key) in countries">
       <country-box
         ref="items"
         :key="key"
@@ -29,7 +29,8 @@ export default {
   },
   data() {
     return {
-      observer: undefined
+      observer: undefined,
+      countries: []
     }
   },
   computed: {
@@ -37,6 +38,7 @@ export default {
   },
   watch: {
     processedCountries() {
+      this.countries = _cloneDeep(this.processedCountries)
       this.observer.disconnect()
       this.observer = undefined
       this.observer = new IntersectionObserver(this.handleIntersection, {
@@ -45,19 +47,25 @@ export default {
     }
   },
   mounted() {
+    this.countries = _cloneDeep(this.processedCountries)
     this.observer = new IntersectionObserver(this.handleIntersection, {
       threshold: 0.1
     })
-    for (const item of this.$refs.items) {
-      // this.observer.observe(item.$el)
-    }
   },
   beforeDestroy() {
     this.observer.disconnect()
   },
   methods: {
+    refreshData() {
+      this.observer.disconnect()
+      this.observer = undefined
+      this.observer = new IntersectionObserver(this.handleIntersection, {
+        threshold: 0.1
+      })
+    },
     handleIntersection(entries, observer) {
-      const countries = _cloneDeep(this.processedCountries)
+      console.log('HI')
+      const countries = _cloneDeep(this.countries)
       entries.forEach(({ target, isIntersecting }) => {
         const id = target.dataset.id
         if (isIntersecting) {
@@ -68,7 +76,7 @@ export default {
         }
       })
 
-      this.processedCountries = countries
+      this.countries = countries
     }
   }
 }

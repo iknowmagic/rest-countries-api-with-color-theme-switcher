@@ -7,7 +7,6 @@
     <transition
       enter-active-class="animate__animated animate__fadeIn"
       leave-active-class="animate__animated animate__fadeOut"
-      appear
     >
       <div v-if="item.dataSeen">
         <div class="country-flag">
@@ -82,8 +81,6 @@ export default {
     observer() {
       if (this.observer) {
         this.observer.observe(this.$el)
-      } else {
-        this.observer.unobserve(this.$el)
       }
     }
   },

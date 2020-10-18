@@ -19,16 +19,78 @@
         </div>
       </header>
       <div class="filters">
-        <div class="input-container">
+        <div
+          :class="[
+            'input-container',
+            { 'input-container-selected': !!countrySearch }
+          ]"
+        >
           <v-icon name="search" class="field-icon" />
           <input
-            v-model="countrySearch"
+            v-model="tempCountrySearch"
             type="text"
             placeholder="Search for a country..."
           />
+          <div
+            class="close"
+            @click="
+              countrySearch = undefined
+              tempCountrySearch = undefined
+            "
+          ></div>
+        </div>
+
+        <div
+          :class="[
+            'select-container',
+            { 'select-container-open': toggleSelect },
+            { 'select-container-selected': selectedRegion }
+          ]"
+        >
+          <div class="select" @click="toggleSelect = !toggleSelect">
+            {{ selectedRegion || 'Filter By Region' }}
+          </div>
+
+          <div class="caret" @click="toggleSelect = !toggleSelect"></div>
+          <div
+            class="close"
+            @click="
+              selectedRegion = undefined
+              toggleSelect = false
+            "
+          ></div>
+          <div class="select-options-container">
+            <transition
+              enter-active-class="animate__animated animate__slideInDown"
+              leave-active-class="animate__animated animate__slideOutUp"
+            >
+              <div v-if="toggleSelect" class="select-options">
+                <div
+                  v-for="region in regions"
+                  :key="region"
+                  class="select-option"
+                  @click="
+                    selectedRegion = region
+                    toggleSelect = false
+                  "
+                >
+                  {{ region }}
+                </div>
+              </div>
+            </transition>
+          </div>
         </div>
       </div>
       <country-boxes />
+
+      <div v-if="empty(processedCountries) && pageLoaded" class="no-results">
+        <v-icon name="map-marked-alt" scale="6" />
+        <div>
+          No results found.
+          <br />
+          Please try again.
+        </div>
+      </div>
 
       <scroll-top>
         <v-icon name="angle-double-up" scale="1.2" />
@@ -59,7 +121,12 @@ export default {
     return {
       pageLoaded: false,
       countries: [],
-      countrySearch: undefined
+      countrySearch: undefined,
+      regions: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+      selectedRegion: undefined,
+      toggleSelect: false,
+      tempCountrySearch: undefined,
+      countrySearchTimeoutId: undefined
     }
   },
   computed: {
@@ -69,12 +136,19 @@ export default {
   watch: {
     countrySearch() {
       this.processCountries()
+    },
+    selectedRegion() {
+      this.processCountries()
+    },
+    tempCountrySearch() {
+      this.handleCountrySearch()
     }
   },
   mounted() {
     this.getAllCountries()
   },
   methods: {
+    empty,
     mapCountries(countries) {
       const countriesMap = countries.map((item, key) => {
         return [item.alpha3Code, { country: item, dataSeen: false }]
@@ -82,11 +156,12 @@ export default {
       return Object.fromEntries(countriesMap)
     },
     processCountries() {
-      if (empty(this.countrySearch)) {
-        this.processedCountries = this.mapCountries(this.countries)
-        return
-      }
-      const filteredCountries = this.countries.filter(item => {
+      // if (empty(this.countrySearch) && empty(this.selectedRegion)) {
+      //   this.processedCountries = this.mapCountries(this.countries)
+      //   return
+      // }
+
+      let filteredCountries = this.countries.filter(item => {
         // const str = item.name.toLowerCase()
         // if (str.startsWith(this.countrySearch)) {
         //   return true
@@ -94,6 +169,16 @@ export default {
         const re = new RegExp(this.countrySearch, 'i')
         return !!item.name.match(re)
       })
+      if (this.selectedRegion) {
+        filteredCountries = filteredCountries.filter(item => {
+          return (
+            item.region ===
+            (this.selectedRegion === 'America'
+              ? 'Americas'
+              : this.selectedRegion)
+          )
+        })
+      }
       this.processedCountries = this.mapCountries(filteredCountries)
     },
     async getAllCountries() {
@@ -102,6 +187,12 @@ export default {
       this.countries = data
       this.processCountries()
       this.pageLoaded = true
+    },
+    handleCountrySearch() {
+      clearTimeout(this.countrySearchTimeoutId)
+      this.countrySearchTimeoutId = setTimeout(() => {
+        this.countrySearch = this.tempCountrySearch
+      }, 800)
     }
   }
 }
