@@ -20,6 +20,8 @@
               v-model="tempCountrySearch"
               type="text"
               placeholder="Search for a country..."
+              title="search"
+              name="search"
             />
             <div
               class="close"

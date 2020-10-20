@@ -5,8 +5,9 @@
 <script>
 // @flow
 
-import MobileMenu from '@/components/MobileMenu'
 import { sync } from 'vuex-pathify'
+
+import MobileMenu from '@/components/MobileMenu'
 
 export default {
   name: 'App',
