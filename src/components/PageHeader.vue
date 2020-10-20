@@ -2,7 +2,7 @@
   <header>
     <div class="header-title">Where in the world?</div>
     <div class="header-toggle" @click="lightMode = !lightMode">
-      <v-icon v-if="!lightMode" name="moon" xxxscale="0.7" class="icon" />
+      <v-icon v-if="!lightMode" name="moon" class="icon" />
       <v-icon v-if="lightMode" name="regular/moon" class="icon" />
       Dark Mode
     </div>

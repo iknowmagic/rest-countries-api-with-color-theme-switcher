@@ -33,6 +33,7 @@ header {
     .icon {
       margin-right: 8px;
       font-size: 12px;
+      transform: rotate(-18deg);
     }
   }
 
@@ -51,7 +52,9 @@ header {
       line-height: 22px;
 
       .icon {
-        font-size: 18px;
+        margin-right: 11px;
+        font-size: 16px;
+        transform: rotate(-20deg);
       }
     }
   }
