@@ -25,44 +25,53 @@
         />
         Back
       </router-link>
-      <div class="country-image">
-        <img :src="countryImage" :alt="singleCountry.name" />
-      </div>
-      <div class="country-title">
-        {{ singleCountry.name }}
-      </div>
-      <div :class="['country-info']">
-        <div
-          v-for="(info, i) in countryInfo"
-          :key="i"
-          :class="['country-info-line', { 'add-space': info.space }]"
-        >
-          <span>{{ info.name }}:</span>
-          {{ info.value }}
+      <div class="single-country-content">
+        <div class="country-image">
+          <img :src="countryImage" :alt="singleCountry.name" />
         </div>
-      </div>
-      <div :class="['country-info2']">
-        <div
-          v-for="(info, i) in countryInfo2"
-          :key="i"
-          :class="['country-info-line']"
-        >
-          <span>{{ info.name }}:</span>
-          {{ info.value }}
-        </div>
-      </div>
-      <div class="country-borders">
-        <div class="country-borders-title">Border Countries</div>
-        <div class="country-borders-info">
-          <router-link
-            v-for="border in borders"
-            :key="border.value"
-            tag="button"
-            class="btn-border"
-            :to="{ name: 'SingleCountry', params: { countryId: border.value } }"
-          >
-            {{ border.name }}
-          </router-link>
+        <div class="country-text">
+          <div class="country-title">
+            {{ singleCountry.name }}
+          </div>
+          <div class="country-info">
+            <div :class="['country-info1']">
+              <div
+                v-for="(info, i) in countryInfo"
+                :key="i"
+                :class="['country-info-line', { 'add-space': info.space }]"
+              >
+                <span>{{ info.name }}:</span>
+                {{ info.value }}
+              </div>
+            </div>
+            <div :class="['country-info2']">
+              <div
+                v-for="(info, i) in countryInfo2"
+                :key="i"
+                :class="['country-info-line']"
+              >
+                <span>{{ info.name }}:</span>
+                {{ info.value }}
+              </div>
+            </div>
+          </div>
+          <div class="country-borders">
+            <div class="country-borders-title">Border Countries:</div>
+            <div class="country-borders-info">
+              <router-link
+                v-for="border in borders"
+                :key="border.value"
+                tag="button"
+                class="btn-border"
+                :to="{
+                  name: 'SingleCountry',
+                  params: { countryId: border.value }
+                }"
+              >
+                {{ border.name }}
+              </router-link>
+            </div>
+          </div>
         </div>
       </div>
     </div>

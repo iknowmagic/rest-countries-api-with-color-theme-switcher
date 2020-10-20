@@ -3,7 +3,7 @@
 import { make } from 'vuex-pathify'
 
 export const state = {
-  lightMode: false,
+  lightMode: true,
   pageLoaded: false,
   processedCountries: {}
 }

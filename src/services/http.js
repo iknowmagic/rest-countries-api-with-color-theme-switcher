@@ -21,9 +21,9 @@ const countryService = axios.create({
     Accept: 'application/json',
     'Content-Type': 'application/json'
     // 'Cache-Control': 'no-cache'
-  }
+  },
   // adapter: cacheAdapterEnhancer(axios.defaults.adapter, cacheConfig) // basic cache
-  // adapter: cacheAdapter
+  adapter: cacheAdapter
 })
 
 // unableToConnectInterceptor(api)
