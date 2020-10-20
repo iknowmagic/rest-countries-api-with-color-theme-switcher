@@ -187,6 +187,7 @@
     margin-bottom: 5px;
 
     .input-container {
+      width: 480px;
       height: 56px;
       input {
         width: 480px;
@@ -197,6 +198,10 @@
       .field-icon {
         margin-top: 4px;
         font-size: 16px;
+      }
+      .close {
+        top: 23px;
+        right: 32px;
       }
     }
     .select-container {
