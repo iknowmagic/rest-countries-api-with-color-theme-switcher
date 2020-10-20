@@ -138,6 +138,35 @@
     }
   }
 
+  @include mq($from: tablet) {
+    .single-country-body {
+      padding: 29px 80px 62px;
+
+      .single-country-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 40px;
+        margin-top: 80px;
+      }
+
+      .country-image {
+        margin-bottom: 36px;
+        img {
+          width: 100%;
+          max-width: 560px;
+          height: 100%;
+          max-height: 401px;
+          border-radius: 10px;
+          object-fit: contain;
+        }
+      }
+
+      .country-text {
+        margin-top: 42px;
+      }
+    }
+  }
+
   @include mq($from: desktop) {
     .single-country-body {
       padding: 29px 80px 62px;
