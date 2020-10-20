@@ -21,7 +21,17 @@
 
     svg {
       margin-bottom: 15px;
+      font-size: 100px;
       opacity: 0.4;
+    }
+
+    @include mq($from: desktop) {
+      font-size: 16px;
+      line-height: 22px;
+
+      svg {
+        font-size: 100px;
+      }
     }
   }
 }

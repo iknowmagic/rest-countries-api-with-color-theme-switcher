@@ -77,8 +77,8 @@
       <country-boxes />
 
       <div v-if="empty(processedCountries) && pageLoaded" class="no-results">
-        <v-icon name="map-marked-alt" scale="6" />
-        <div>
+        <v-icon name="map-marked-alt" />
+        <div class="no-results-text">
           No results found.
           <br />
           Please try again.
