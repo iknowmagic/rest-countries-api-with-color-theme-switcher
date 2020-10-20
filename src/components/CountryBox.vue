@@ -1,5 +1,5 @@
 <template>
-  <div class="country-box">
+  <div :class="['country-box']">
     <div v-if="!item.dataSeen" class="map-placeholder">
       <v-icon name="map-marked-alt" scale="6" />
     </div>
@@ -8,7 +8,15 @@
       enter-active-class="animate__animated animate__fadeIn"
       leave-active-class="animate__animated animate__fadeOut"
     >
-      <div v-if="item.dataSeen">
+      <router-link
+        v-if="item.dataSeen"
+        class="country-box-content"
+        tag="div"
+        :to="{
+          name: 'SingleCountry',
+          params: { countryId: item.country.alpha3Code }
+        }"
+      >
         <div class="country-flag">
           <img
             v-if="countryImage"
@@ -36,7 +44,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </router-link>
     </transition>
   </div>
 </template>
@@ -107,6 +115,12 @@ export default {
     async loadCountryImage() {
       const img = await this.getImage(this.item.country.flag)
       this.countryImage = img.src
+    },
+    goToCountry() {
+      this.$router.push({
+        name: 'SingleCountry',
+        params: { countryId: this.item.country.alpha3Code }
+      })
     }
   }
 }

@@ -8,6 +8,7 @@ header {
   height: 80px;
   padding: 30px 16px;
   margin-bottom: 24px;
+  color: #fff;
   background: #2b3844;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.0562443);
   transition: background 0.3s ease;
@@ -58,6 +59,7 @@ header {
 
 .light-mode {
   header {
+    color: #111517;
     background: #fff;
   }
 }

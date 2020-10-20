@@ -1,0 +1,19 @@
+.not-found {
+  display: grid;
+  grid-template-rows: 80px 80px;
+  // grid-template-columns: 400px;
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+
+  .not-found-number {
+    font-size: 100px;
+  }
+
+  a {
+    color: rgb(23, 82, 138);
+    text-decoration: none;
+  }
+}

@@ -5,19 +5,7 @@
       <div>Loading data...</div>
     </div>
     <div v-if="pageLoaded" class="content">
-      <header>
-        <div class="header-title">Where in the world?</div>
-        <div class="header-toggle" @click="lightMode = !lightMode">
-          <v-icon v-if="!lightMode" name="moon" xxxscale="0.7" class="icon" />
-          <v-icon
-            v-if="lightMode"
-            name="regular/moon"
-            xxxscale="0.7"
-            class="icon"
-          />
-          Dark Mode
-        </div>
-      </header>
+      <page-header />
 
       <div class="filters-container">
         <div class="filters">
@@ -105,7 +93,7 @@
 <script>
 // @flow
 
-import { sync } from 'vuex-pathify'
+import { get, sync } from 'vuex-pathify'
 
 import _map from 'lodash/map'
 
@@ -114,13 +102,15 @@ import api from '@/services'
 import empty from '@/helpers/empty'
 
 import CountryBoxes from '@/components/CountryBoxes'
+import PageHeader from '@/components/PageHeader'
 import ScrollTop from '@/components/ScrollTop'
 
 export default {
   name: 'Home',
   components: {
     CountryBoxes,
-    ScrollTop
+    ScrollTop,
+    PageHeader
   },
   data() {
     return {
@@ -136,7 +126,7 @@ export default {
     }
   },
   computed: {
-    lightMode: sync('app/lightMode'),
+    lightMode: get('app/lightMode'),
     processedCountries: sync('app/processedCountries')
   },
   watch: {

@@ -5,6 +5,11 @@ export default [
     path: '/',
     component: () => loadPage('Home'),
     name: 'Home'
-  }
-  // { path: '*', component: () => loadPage('NotFound'), name: 'NotFound' }
+  },
+  {
+    path: '/country/:countryId',
+    component: () => loadPage('SingleCountry'),
+    name: 'SingleCountry'
+  },
+  { path: '*', component: () => loadPage('NotFound'), name: 'NotFound' }
 ]

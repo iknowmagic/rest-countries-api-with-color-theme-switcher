@@ -1,2 +1,136 @@
 .single-country {
+  color: #fff;
+  background-color: #202c36;
+
+  &.loading {
+    height: 100%;
+  }
+
+  .single-country-body {
+    padding: 17px 28px 62px;
+
+    .btn-back {
+      display: grid;
+      grid-template-rows: auto;
+      grid-template-columns: 25px auto;
+      align-items: center;
+      justify-content: center;
+      width: 104px;
+      height: 32px;
+      margin-bottom: 63px;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 20px;
+      color: #fff;
+      cursor: pointer;
+      background: #2b3844;
+      border: none;
+      border-radius: 2px;
+      outline: none;
+      box-shadow: 0 0 7px rgba(0, 0, 0, 0.293139);
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: darken(#2b3844, 3%);
+      }
+    }
+    .country-image {
+      margin-bottom: 36px;
+      img {
+        width: 320px;
+        height: 229px;
+        border-radius: 5px;
+      }
+    }
+
+    .country-title {
+      margin-bottom: 17px;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 30px;
+    }
+
+    .country-info {
+      .country-info-line {
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 32px;
+
+        span {
+          font-weight: 600;
+        }
+      }
+    }
+
+    .country-info2 {
+      margin-top: 32px;
+      @extend .country-info;
+    }
+
+    .country-borders {
+      margin-top: 31px;
+
+      .country-borders-title {
+        margin-bottom: 16px;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+      }
+
+      .country-borders-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        .btn-border {
+          min-width: 96px;
+          padding: 6px 15px;
+          font-size: 12px;
+          font-weight: 300;
+          line-height: 16px;
+          color: #fff;
+          white-space: nowrap;
+          cursor: pointer;
+          background: #2b3844;
+          border: none;
+          border-radius: 2px;
+          outline: none;
+          box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.104931);
+
+          &:hover {
+            background: darken(#2b3844, 3%);
+          }
+        }
+      }
+    }
+  }
+
+  &.light-mode {
+    color: #111517;
+    background: #f2f2f2;
+
+    .single-country-body {
+      .btn-back {
+        color: #111517;
+        background: #fff;
+
+        &:hover {
+          background: darken(#fff, 3%);
+        }
+      }
+
+      .country-borders {
+        .country-borders-info {
+          .btn-border {
+            color: #111511;
+            background: #fff;
+
+            &:hover {
+              background: darken(#fff, 3%);
+            }
+          }
+        }
+      }
+    }
+  }
 }
