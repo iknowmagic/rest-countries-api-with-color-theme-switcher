@@ -7,73 +7,7 @@
     <div v-if="pageLoaded" class="content">
       <page-header />
 
-      <div class="filters-container">
-        <div class="filters">
-          <div
-            :class="[
-              'input-container',
-              { 'input-container-selected': !!countrySearch }
-            ]"
-          >
-            <v-icon name="search" class="field-icon" />
-            <input
-              v-model="tempCountrySearch"
-              type="text"
-              placeholder="Search for a country..."
-              title="search"
-              name="search"
-            />
-            <div
-              class="close"
-              @click="
-                countrySearch = undefined
-                tempCountrySearch = undefined
-              "
-            ></div>
-          </div>
-
-          <div
-            :class="[
-              'select-container',
-              { 'select-container-open': toggleSelect },
-              { 'select-container-selected': selectedRegion }
-            ]"
-          >
-            <div class="select" @click="toggleSelect = !toggleSelect">
-              {{ selectedRegion || 'Filter By Region' }}
-            </div>
-
-            <div class="caret" @click="toggleSelect = !toggleSelect"></div>
-            <div
-              class="close"
-              @click="
-                selectedRegion = undefined
-                toggleSelect = false
-              "
-            ></div>
-            <div class="select-options-container">
-              <transition
-                enter-active-class="animate__animated animate__slideInDown"
-                leave-active-class="animate__animated animate__slideOutUp"
-              >
-                <div v-if="toggleSelect" class="select-options">
-                  <div
-                    v-for="region in regions"
-                    :key="region"
-                    class="select-option"
-                    @click="
-                      selectedRegion = region
-                      toggleSelect = false
-                    "
-                  >
-                    {{ region }}
-                  </div>
-                </div>
-              </transition>
-            </div>
-          </div>
-        </div>
-      </div>
+      <filters />
       <country-boxes />
 
       <div v-if="empty(processedCountries) && pageLoaded" class="no-results">
@@ -104,6 +38,7 @@ import api from '@/services'
 import empty from '@/helpers/empty'
 
 import CountryBoxes from '@/components/CountryBoxes'
+import Filters from '@/components/Filters'
 import PageHeader from '@/components/PageHeader'
 import ScrollTop from '@/components/ScrollTop'
 
@@ -112,24 +47,21 @@ export default {
   components: {
     CountryBoxes,
     ScrollTop,
-    PageHeader
+    PageHeader,
+    Filters
   },
   data() {
     return {
       pageLoaded: false,
       countries: [],
-      sortedCountries: [],
-      countrySearch: undefined,
-      regions: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
-      selectedRegion: undefined,
-      toggleSelect: false,
-      tempCountrySearch: undefined,
-      countrySearchTimeoutId: undefined
+      sortedCountries: []
     }
   },
   computed: {
     lightMode: get('app/lightMode'),
-    processedCountries: sync('app/processedCountries')
+    processedCountries: sync('app/processedCountries'),
+    countrySearch: get('app/countrySearch'),
+    selectedRegion: get('app/selectedRegion')
   },
   watch: {
     countrySearch() {
@@ -137,9 +69,6 @@ export default {
     },
     selectedRegion() {
       this.processCountries()
-    },
-    tempCountrySearch() {
-      this.handleCountrySearch()
     }
   },
   mounted() {
@@ -189,12 +118,6 @@ export default {
       })
       this.processCountries()
       this.pageLoaded = true
-    },
-    handleCountrySearch() {
-      clearTimeout(this.countrySearchTimeoutId)
-      this.countrySearchTimeoutId = setTimeout(() => {
-        this.countrySearch = this.tempCountrySearch
-      }, 800)
     }
   }
 }

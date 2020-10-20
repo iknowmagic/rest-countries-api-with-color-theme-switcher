@@ -5,7 +5,9 @@ import { make } from 'vuex-pathify'
 export const state = {
   lightMode: true,
   pageLoaded: false,
-  processedCountries: {}
+  processedCountries: {},
+  countrySearch: undefined,
+  selectedRegion: undefined
 }
 
 export const getters = {

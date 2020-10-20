@@ -179,11 +179,22 @@
     }
   }
 
+  @include mq($from: laptop) {
+    padding: 0 43px;
+  }
   @include mq($from: desktop) {
+    padding: 0 78px;
+  }
+  @include mq($from: hd) {
+    padding: 0 134px;
+  }
+
+  @include mq($from: laptop) {
     grid-template-columns: auto auto;
     justify-content: space-between;
     width: 100%;
-    max-width: calc(1440px - (80px * 2));
+    // padding: 0 78px;
+    // max-width: calc(1440px - (80px * 2));
     margin-bottom: 5px;
 
     .input-container {

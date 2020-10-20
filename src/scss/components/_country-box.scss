@@ -3,9 +3,9 @@
   row-gap: 40px;
   justify-content: center;
 
-  @include mq($from: desktop) {
-    grid-template-columns: 264px 264px 264px 264px;
-    column-gap: 75px;
+  @include mq($from: tablet) {
+    grid-template-columns: repeat(auto-fill, 264px);
+    gap: 75px;
   }
 }
 
