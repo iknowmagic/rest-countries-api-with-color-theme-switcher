@@ -35,27 +35,28 @@
           </div>
           <div class="country-info">
             <div :class="['country-info1']">
-              <div
-                v-for="(info, i) in countryInfo"
-                :key="i"
-                :class="['country-info-line', { 'add-space': info.space }]"
-              >
-                <span>{{ info.name }}:</span>
-                {{ info.value }}
-              </div>
+              <template v-for="(info, i) in countryInfo">
+                <div
+                  v-if="info.value"
+                  :key="i"
+                  :class="['country-info-line', { 'add-space': info.space }]"
+                >
+                  <span>{{ info.name }}:</span>
+                  {{ info.value }}
+                </div>
+              </template>
             </div>
+
             <div :class="['country-info2']">
-              <div
-                v-for="(info, i) in countryInfo2"
-                :key="i"
-                :class="['country-info-line']"
-              >
-                <span>{{ info.name }}:</span>
-                {{ info.value }}
-              </div>
+              <template v-for="(info, i) in countryInfo2">
+                <div v-if="info.value" :key="i" :class="['country-info-line']">
+                  <span>{{ info.name }}:</span>
+                  {{ info.value }}
+                </div>
+              </template>
             </div>
           </div>
-          <div class="country-borders">
+          <div v-if="borders && borders.length > 0" class="country-borders">
             <div class="country-borders-title">Border Countries:</div>
             <div class="country-borders-info">
               <router-link
