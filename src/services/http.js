@@ -14,7 +14,7 @@ import cacheAdapter from './helpers/cacheAdapter'
 // }
 
 const countryService = axios.create({
-  baseURL: `https://restcountries.eu/rest/v2`,
+  baseURL: `https://restcountries.com/v2`,
   // withCredentials: true,
   timeout: 30000,
   headers: {

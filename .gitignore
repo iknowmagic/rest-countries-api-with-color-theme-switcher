@@ -28,3 +28,4 @@ backstop_data/
 __image_snapshots__
 src/assets/images/design
 src/scss/development
+.vercel
