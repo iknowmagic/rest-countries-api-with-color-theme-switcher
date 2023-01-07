@@ -29,7 +29,7 @@
     "vue-load-image": "^0.1.11",
     "vue-meta": "^2.4.0",
     "vue-mq": "^1.0.1",
-    "vue-router": "^3.4.7",
+    "vue-router": "^3.5.1",
     "vue-virtual-scroller": "^1.0.10",
     "vuelidate": "^0.7.5",
     "vuex": "^3.5.1",
