@@ -12471,10 +12471,10 @@ vue-jest@^3.0.5:
     tsconfig "^7.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
-vue-load-image@^0.1.11:
-  version "0.1.11"
-  resolved "https://registry.yarnpkg.com/vue-load-image/-/vue-load-image-0.1.11.tgz#e0f9a1ba4a7b9181d10654d214ce9d6e8f86d94d"
-  integrity sha512-YPbEuvsCkwZetUqfg2hU3xhTK8danDCA2ofISjPBhnz3MxyPGowOyEzCsRGdRDpo/5A2yvu6UwDpi8BMR7z47w==
+vue-load-image@^0.1.61:
+  version "0.1.61"
+  resolved "https://registry.yarnpkg.com/vue-load-image/-/vue-load-image-0.1.61.tgz#2f2de66c4ea3b7469d943507b099bb9aa8221608"
+  integrity sha512-x5vohpJZdTK5sK6OXb6usbPc1kAgKVYADCHskTQzFrp6/HV9qdXkTdrdm0Th/shU/rnhHSAqMAsgjFAMSdOskg==
 
 "vue-loader-v16@npm:vue-loader@^16.0.0-beta.7":
   version "16.0.0-beta.8"
